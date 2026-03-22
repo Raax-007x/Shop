@@ -180,10 +180,9 @@ class _AddressScreenState extends State<AddressScreen> {
                   ],
                 ),
               ),
+              // 🔥 FIX: ApplePayButton se style aur type hata diya
               ApplePayButton(
                 width: double.infinity,
-                style: ApplePayButtonStyle.whiteOutline,
-                type: ApplePayButtonType.buy,
                 paymentConfigurationAsset: 'applepay.json',
                 onPaymentResult: onApplePayResult,
                 paymentItems: paymentItems,
@@ -192,14 +191,13 @@ class _AddressScreenState extends State<AddressScreen> {
                 onPressed: () => payPressed(address),
               ),
               const SizedBox(height: 10),
+              // 🔥 FIX: GooglePayButton se style aur type hata diya
               GooglePayButton(
                 onPressed: () => payPressed(address),
                 paymentConfigurationAsset: 'gpay.json',
                 onPaymentResult: onGooglePayResult,
                 paymentItems: paymentItems,
                 height: 50,
-                style: GooglePayButtonStyle.black,
-                type: GooglePayButtonType.buy,
                 margin: const EdgeInsets.only(top: 15),
                 loadingIndicator: const Center(
                   child: CircularProgressIndicator(),
