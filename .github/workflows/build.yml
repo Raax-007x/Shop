@@ -1,0 +1,46 @@
+name: Build Amazon Clone APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Manually run karne ke liye
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Purane Flutter projects ke liye Java 11 sabse best aur stable rehta hai
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'gradle'
+
+      # 🔥 YAHAN FIX HAI: Specific Flutter version jo Dart <3.0.0 ko support karta hai
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12' 
+          channel: 'stable'
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Release APK Build Command
+      - name: Build Release APK
+        run: flutter build apk --release --android-skip-build-dependency-validation
+
+      # Artifact Upload (Taki aap GitHub se APK download kar sakein)
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-clone-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
