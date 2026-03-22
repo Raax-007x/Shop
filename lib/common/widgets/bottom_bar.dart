@@ -4,7 +4,8 @@ import 'package:amazon_clone_tutorial/features/cart/screens/cart_screen.dart';
 import 'package:amazon_clone_tutorial/features/home/screens/home_screen.dart';
 import 'package:amazon_clone_tutorial/providers/user_provider.dart';
 import 'package:badges/badges.dart';
-import 'package:flutter/material.dart';
+// 🔥 YAHAN FIX HAI: Flutter wale Badge ko hide kar diya taaki conflict na ho
+import 'package:flutter/material.dart' hide Badge;
 import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
