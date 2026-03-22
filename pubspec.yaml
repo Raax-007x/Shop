@@ -99,3 +99,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# 🔥 YAHAN FIX HAI: File creation wala error rokne ke liye
+dependency_overrides:
+  file: ^6.1.4
