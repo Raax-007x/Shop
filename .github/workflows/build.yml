@@ -16,7 +16,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Purane Flutter projects ke liye Java 11 sabse best aur stable rehta hai
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -24,7 +23,6 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      # 🔥 YAHAN FIX HAI: Specific Flutter version jo Dart <3.0.0 ko support karta hai
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -34,11 +32,10 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      # Release APK Build Command
+      # 🔥 YAHAN FIX HAI: Wo extra flag hata diya gaya hai
       - name: Build Release APK
-        run: flutter build apk --release --android-skip-build-dependency-validation
+        run: flutter build apk --release
 
-      # Artifact Upload (Taki aap GitHub se APK download kar sakein)
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
